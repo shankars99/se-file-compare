@@ -1,0 +1,7 @@
+java : Java,
+c : C,
+cpp : C++,
+lex : C,
+js : JavaScript,
+jsm : JavaScript,
+jsp : JavaScript
