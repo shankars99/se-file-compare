@@ -3,14 +3,14 @@ se-file-compare/
     |-common/
         |-parser.java
     |-fonts/
-        |-fontlist.txt
-        |-formatType.java
+        |-fontlistGedit.txt
+        |-fontlistNotePad++.txt
         |-font.java
-        |-main()
     |-languages/
-        |-languagelist.txt
+        |-languagelistGedit.txt
+        |-languagelistNotePad++.txt
         |-language.java
-        |-main()
-    |- main()
+    |- fontList.java
+    |- langList.java
     |- README.md
     |- document-structure.txt
