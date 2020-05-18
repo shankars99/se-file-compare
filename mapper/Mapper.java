@@ -1,10 +1,11 @@
 package mapper;
 
+import java.io.IOException;
 import java.util.*;
 
 public abstract class Mapper{
 
-    public abstract String getString();
+    public abstract String readWords() throws IOException;
     public abstract String[][] splitter(final String t);
 
     public <K, V> List<K> getKeys(final Map<K, V> mapOfExtension, final V value) {
