@@ -1,0 +1,16 @@
+se-file-compare/
+    |
+    |-common/
+        |-parser.java
+    |-fonts/
+        |-fontlist.txt
+        |-formatType.java
+        |-font.java
+        |-main()
+    |-languages/
+        |-languagelist.txt
+        |-language.java
+        |-main()
+    |- main()
+    |- README.md
+    |- document-structure.txt
