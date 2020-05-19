@@ -5,8 +5,17 @@ import java.util.*;
 
 public abstract class Mapper{
 
+    String vals[][] = { { "" }, { "" } };
     public abstract String readWords() throws IOException;
     public abstract String[][] splitter(final String t);
+
+    public void setStr(final String[][] s) {
+        vals = s;
+    }
+
+    public String[][] getStr() {
+        return vals;
+    }
 
     public <K, V> List<K> getKeys(final Map<K, V> mapOfExtension, final V value) {
         List<K> listOfKeys = null;
@@ -38,6 +47,27 @@ public abstract class Mapper{
         }
         //System.out.println(tempMap);
         return tempMap;
+    }
+
+    public final HashMap<String, String> compareMap(HashMap<String, String> gedit, HashMap<String, String> npp) {
+        final HashMap<String, String> commonMap = new HashMap<String, String>();
+        {
+            for (String value : gedit.keySet()) {
+                if (npp.containsKey(value) == true) {
+                    commonMap.put(value, "common");
+                } else {
+                    commonMap.put(value, "gedit");
+                }
+            }
+
+            for (String value : npp.keySet()) {
+                if(commonMap.containsKey(value) != true){
+                    commonMap.put(value, "npp");
+                }
+            }
+        }
+        //System.out.println(commonMap);
+        return commonMap;
     }
 }
 
