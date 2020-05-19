@@ -1,16 +1,24 @@
 se-file-compare/
     |
-    |-common/
-        |-parser.java
+    |-mapper/
+        |-Mapper.java
+    |-backgrounds/
+        |-Background.java
+        |-backgroundlistGedit.txt
+        |-backgroundlistNotePad++.txt
     |-fonts/
+        |-font.java
         |-fontlistGedit.txt
         |-fontlistNotePad++.txt
-        |-font.java
     |-languages/
+        |-language.java
         |-languagelistGedit.txt
         |-languagelistNotePad++.txt
-        |-language.java
-    |- fontList.java
-    |- langList.java
-    |- README.md
+    |-tabs/
+        |-Tabs.java
+    |- CompareBackground.java
+    |- CompareFont.java
+    |- CompareLang.java
+    |- CompareTabs.java
     |- document-structure.txt
+    |- README.md
