@@ -1,22 +1,22 @@
-import fonts.Font;
+import backgrounds.Background;
 
 import java.io.*;
 import java.util.*;
 
-public class CompareFont {
+public class CompareBackground {
 
-    public static void readFiles(final Font obj) throws IOException {
+    public static void readFiles(final Background obj) throws IOException {
         // Create a Map of words and their frequency count
         final String str[][] = obj.splitter(obj.readWords());
-        final HashMap<String, String> mapOfFonts = obj.getMap(str);
-        final String testKey = "ArielBlack";
+        final HashMap<String, String> mapOfStyles = obj.getMap(str);
+        final String testKey = "Blue";
 
         System.out.println(obj.getFileName());
-        System.out.println("" + testKey + " = " + mapOfFonts.get(testKey) + "\n");
+        System.out.println("" + testKey + " = " + mapOfStyles.get(testKey) + "\n");
     }
 
     public static void main(final String[] args) throws IOException {
-        final Font obj = new Font();
+        final Background obj = new Background();
 
         obj.setPath("Gedit");
         readFiles(obj);
@@ -24,5 +24,4 @@ public class CompareFont {
         obj.setPath("Notepad++");
         readFiles(obj);
     }
-
 }

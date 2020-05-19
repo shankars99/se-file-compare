@@ -10,13 +10,14 @@ public class CompareLang {
         final String str[][] = obj.splitter(obj.readWords());
         final HashMap<String, String> mapOfExtension = obj.getMap(str);
         final String testKey = "JavaScript";
+        final String testExt = ".js";
 
         // Get the list of keys whose value matches with given value.
         final List<String> listOfKeys = obj.getKeys(mapOfExtension, testKey);
 
         System.out.println(obj.getFileName());
         System.out.println(listOfKeys);
-        System.out.println("" + testKey + " = " + mapOfExtension.get(".js") + "\n");
+        System.out.println("" + testKey + " = " + mapOfExtension.get(testExt) + "\n");
     }
 
     public static void main(final String[] args) throws IOException {
