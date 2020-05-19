@@ -18,11 +18,11 @@ public class Tabs {
 
         if(currTab < 0)
             System.out.println("\n  Error:Only a positive number of tabs can be opened");
-        else if(currTab > toggle){
-            System.out.println("\n  Error:Maximum number of tabs reached.\n  Close a tab to proceed");
+        else if(currTab > toggle-1){
+            System.out.println("\n  Error:Maximum number of tabs reached:"+toggle+".\n  Close a tab to proceed");
         }
         else{
-            System.out.println("\nNew tab successfully opened at "+currTab+".");
+            System.out.println("\nNew tab successfully opened at location: "+(currTab + 1)+".");
         }
     }
 }

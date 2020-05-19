@@ -8,7 +8,7 @@ public class CompareTabs {
     {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-        System.out.print("\n1. Geddit\n2. Notepad++\nEnter your choice:");
+        System.out.print("\nEditors:\n1. Geddit\n2. Notepad++\nEnter your choice:");
         return Integer.parseInt(br.readLine());
 
     }
