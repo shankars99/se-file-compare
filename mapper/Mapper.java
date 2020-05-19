@@ -36,7 +36,7 @@ public abstract class Mapper{
                 tempMap.put(str[i][0], str[i][1]);
             }
         }
-
+        //System.out.println(tempMap);
         return tempMap;
     }
 }
