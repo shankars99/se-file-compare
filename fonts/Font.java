@@ -41,8 +41,10 @@ public class Font extends Mapper {
         final String str[][] = new String[temp.length][2];
 
         for (int i = 0; i < str.length; i++) {
-            str[i] = temp[i].split(":");
-            str[i][0] = "." + str[i][0];
+            str[i][0] = temp[i];
+            str[i][1] = "true";
+
+        //    System.out.println(str[i][0]+" "+ str[i][1]);
         }
 
         return str;
