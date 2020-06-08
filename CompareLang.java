@@ -11,28 +11,31 @@ public class CompareLang {
         obj.setStr(str);
     }
 
-    public static HashMap<String, String> compareMap(final Language obj1, final Language obj2) {
-        return (obj1.compareMap(obj1.getMap(obj1.getStr()), obj2.getMap(obj2.getStr())));
+    public static HashMap<String, String> commonMap(final Language obj[]) {
+        return (obj[0].getCommonMap(obj[0].getMap(obj[0].getStr()), obj[1].getMap(obj[1].getStr()),
+                obj[2].getMap(obj[2].getStr()), obj[3].getMap(obj[3].getStr())));
     }
 
-    public static void display(HashMap<String, String> resMap){
+    public static void display(HashMap<String, String> common, final Language obj[], final String names[]) {
+
         Language temp = new Language();
+        System.out.println("Common : " + temp.getKeys(common, "common"));
 
-        System.out.println("Common : " + temp.getKeys(resMap, "common"));
-        System.out.println("Gedit : " + temp.getKeys(resMap, "gedit"));
-        System.out.println("Notepad++ : " + temp.getKeys(resMap, "npp"));
+        for (int i = 0; i < obj.length; ++i) {
+            System.out.println(names[i] + " : "
+                    + temp.getKeys(temp.compareMap(common, obj[i].getMap(obj[i].getStr()), names[i]), names[i]));
+        }
     }
+
     public static void main(final String[] args) throws IOException {
-        final Language obj[] = new Language[2];
-        obj[0] = new Language();
-        obj[1] = new Language();
+        final Language obj[] = new Language[4];
+        final String names[] = { "Gedit", "Notepad++", "Sublime", "Notepad" };
+        for (int i = 0; i < 4; ++i) {
+            obj[i] = new Language();
+            obj[i].setPath(names[i]);
+            readFiles(obj[i]);
+        }
 
-        obj[0].setPath("Gedit");
-        readFiles(obj[0]);
-
-        obj[1].setPath("Notepad++");
-        readFiles(obj[1]);
-
-        display(compareMap(obj[0], obj[1]));
+        display(commonMap(obj), obj, names);
     }
 }

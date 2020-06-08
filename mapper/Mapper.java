@@ -49,25 +49,35 @@ public abstract class Mapper{
         return tempMap;
     }
 
-    public final HashMap<String, String> compareMap(HashMap<String, String> gedit, HashMap<String, String> npp) {
+    public final HashMap<String, String> getCommonMap(HashMap<String, String> gedit,
+                                                    HashMap<String, String> npp,
+                                                    HashMap<String, String> sublime,
+                                                    HashMap<String, String> np) {
         final HashMap<String, String> commonMap = new HashMap<String, String>();
         {
             for (String value : gedit.keySet()) {
-                if (npp.containsKey(value) == true) {
+                if (npp.containsKey(value) == true && sublime.containsKey(value) == true &&
+                    np.containsKey(value) == true) {
                     commonMap.put(value, "common");
-                } else {
-                    commonMap.put(value, "gedit");
-                }
-            }
-
-            for (String value : npp.keySet()) {
-                if(commonMap.containsKey(value) != true){
-                    commonMap.put(value, "npp");
                 }
             }
         }
         //System.out.println(commonMap);
         return commonMap;
     }
-}
 
+    public final HashMap<String, String> compareMap(HashMap<String, String> common,
+                                                 HashMap<String, String> test, String name) {
+        final HashMap<String, String> resMap = new HashMap<String, String>();
+        {
+            for (String value : test.keySet()) {
+                if (common.containsKey(value) != true) {
+                    resMap.put(value, name);
+                }
+            }
+        }
+        // System.out.println(commonMap);
+        return resMap;
+    }
+
+}

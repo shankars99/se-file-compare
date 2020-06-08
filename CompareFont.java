@@ -11,29 +11,32 @@ public class CompareFont {
         obj.setStr(str);
     }
 
-    public static HashMap<String, String> compareMap(final Font obj1, final Font obj2) {
-        return (obj1.compareMap(obj1.getMap(obj1.getStr()), obj2.getMap(obj2.getStr())));
+    public static HashMap<String, String> commonMap(final Font obj[]) {
+        return (obj[0].getCommonMap(obj[0].getMap(obj[0].getStr()), obj[1].getMap(obj[1].getStr()),
+                obj[2].getMap(obj[2].getStr()),obj[3].getMap(obj[3].getStr())));
     }
 
-    public static void display(HashMap<String, String> resMap) {
-        Font temp = new Font();
+    public static void display(HashMap<String, String> common, final Font obj[],final String names[]) {
 
-        System.out.println("Common : " + temp.getKeys(resMap, "common"));
-        System.out.println("Gedit : " + temp.getKeys(resMap, "gedit"));
-        System.out.println("Notepad++ : " + temp.getKeys(resMap, "npp"));
+        Font temp = new Font();
+        System.out.println("Common : " + temp.getKeys(common, "common"));
+
+        for(int i = 0;i<obj.length;++i)
+        {
+            System.out.println(names[i] + " : " + temp.getKeys(temp.compareMap(common, obj[i].getMap(obj[i].getStr()),names[i]), names[i]));
+        }
     }
 
     public static void main(final String[] args) throws IOException {
-        final Font obj[] = new Font[2];
-        obj[0] = new Font();
-        obj[1] = new Font();
+        final Font obj[] = new Font[4];
+        final String names[] = {"Gedit","Notepad++","Sublime","Notepad"};
+        for(int i = 0; i<4;++i)
+        {
+            obj[i] = new Font();
+            obj[i].setPath(names[i]);
+            readFiles(obj[i]);
+        }
 
-        obj[0].setPath("Gedit");
-        readFiles(obj[0]);
-
-        obj[1].setPath("Notepad++");
-        readFiles(obj[1]);
-
-        display(compareMap(obj[0], obj[1]));
+        display(commonMap(obj),obj,names);
     }
 }
