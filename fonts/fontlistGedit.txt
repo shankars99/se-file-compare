@@ -1,2 +1,5 @@
 Times New Roman,
-Ariel Black
+Ariel Black,
+Snap ITC,
+Courier,
+Impact

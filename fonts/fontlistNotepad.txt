@@ -1,5 +1,5 @@
 Times New Roman,
 Ariel Black,
-Snap ITC,
-Comic Sans MS,
+Allegro,
+Courier,
 Impact

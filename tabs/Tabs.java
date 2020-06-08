@@ -4,6 +4,9 @@ import java.io.*;
 public class Tabs {
     final int geditMax = 45;
     final int nppMax = 80;
+    final int sublimeMax = 60;
+    final int npMax = 30;
+
     int currTab = -1;
 
     public void getTabs() throws IOException{
@@ -14,15 +17,36 @@ public class Tabs {
     }
 
     public void tabHandler(int toggle){
-        toggle = toggle==1?geditMax:nppMax;
-
-        if(currTab < 0)
-            System.out.println("\n  Error:Only a positive number of tabs can be opened");
-        else if(currTab > toggle-1){
-            System.out.println("\n  Error:Maximum number of tabs reached:"+toggle+".\n  Close a tab to proceed");
+        boolean flag = true;
+        switch(toggle)
+        {
+            case 1:
+                toggle = geditMax;
+                break;
+            case 2:
+                toggle = nppMax;
+                break;
+            case 3:
+                toggle = sublimeMax;
+                break;
+            case 4:
+                toggle = npMax;
+                break;
+            default:
+                System.out.println("Incorrect app index number");
+                flag = false;
         }
-        else{
-            System.out.println("\nNew tab successfully opened at location: "+(currTab + 1)+".");
+
+        if(flag == true)
+        {
+            if (currTab < 0)
+                System.out.println("\n  Error:Only a positive number of tabs can be opened");
+            else if (currTab > toggle - 1) {
+                System.out
+                        .println("\n  Error:Maximum number of tabs reached:" + toggle + ".\n  Close a tab to proceed");
+            } else {
+                System.out.println("\nNew tab successfully opened at location: " + (currTab + 1) + ".");
+            }
         }
     }
 }

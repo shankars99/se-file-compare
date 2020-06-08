@@ -1,11 +1,9 @@
 java : Java,
 c : C,
 cpp : C++,
+lex : C,
 js : JavaScript,
 jsm : JavaScript,
 jsp : JavaScript,
-jxp : JavaScript,
-php : PHP,
-py : Python,
-sh : Shell,
-bash : Bash
+f90 : Fortran,
+f95 : Fortran

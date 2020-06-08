@@ -1,7 +1,10 @@
 java : Java,
 c : C,
 cpp : C++,
-lex : C,
 js : JavaScript,
-jsm : JavaScript,
-jsp : JavaScript
+jsp : JavaScript,
+php : PHP,
+py : Python,
+bash : Bash,
+baml : C#,
+cache : C#

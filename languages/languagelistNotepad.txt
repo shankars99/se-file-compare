@@ -8,4 +8,5 @@ jxp : JavaScript,
 php : PHP,
 py : Python,
 sh : Shell,
-bash : Bash
+bash : Bash,
+lua : Lua

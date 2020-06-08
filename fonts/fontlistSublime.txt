@@ -1,5 +1,6 @@
 Times New Roman,
 Ariel Black,
 Snap ITC,
-Comic Sans MS,
+Teletype,
+Courier,
 Impact

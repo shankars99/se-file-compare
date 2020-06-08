@@ -1,3 +1,6 @@
-Red,
+Blue,
+Black,
+Orange,
+Pink,
 Green,
-Black
+Purple
