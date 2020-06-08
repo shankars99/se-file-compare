@@ -18,3 +18,5 @@ To compare the fonts:
 
 To compare the languages supported:
     $java CompareLang
+
+Maintain a two blank line after last entry
