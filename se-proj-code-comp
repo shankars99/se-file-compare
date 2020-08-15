@@ -1,0 +1,165 @@
+basic features such as
+    date and time:
+        g_date_time_new_now_utc ()
+
+    The language in which the user is typing:
+        gedit_document_get_language (doc);
+
+Hash tables are used to store the data obtained from gedit-document.c
+Linked lists are used to have the multiple tabs linked together
+
+Gedit creates a private copy of tabs opened so that the edits are made on it and does not reflect on your actual file should there be a
+
+GeditHistoryEntry is a structure and this has a maximum size of 40 (so it is compareable to a stack):
+    It contains details such as:
+        history_id;
+        length;
+        *completion;
+        *length
+    useful to know details on the past opened files
+
+The functions under gedit-recent.c
+    we see a lot of pointers variables.
+    this is the place where all the history related tasks are executed, the other ones being the initializers of the tasks.
+
+In the classes that perform search activities we find the folowing referenced a lot.
+	case_sensitive
+	at_word_boundaries
+	regex_enabled
+	wrap_around
+	search_text
+
+    those keys are required to generate the right searched values.
+    the data is then passed into the history and then messages are sent to be saved in the private copy of the file by gedit.
+
+gedit_message_bus_class_init (GeditMessageBusClass *klass)
+    here the data is dispatched on the Data-Bus
+    there's callback, confirm, destroy message and other operations.
+    listeners are available that track the data being moved.
+    process id of the tabs are also monitored
+
+windows and tab related functions such as:
+    get_active_window (GtkApplication *app)
+    gedit_app_get_main_windows (GeditApp *app)
+    gedit_app_get_documents	(GeditApp *app)
+    gedit_app_get_views	(GeditApp *app)
+    is_duplicated_file (GSList *files, GFile  *file)
+
+gedit-tabs.c
+    here we have the functions, variables and structures that are involved in the tabs formation and deletion
+    Objects of GeditDocument are passed around between the functions for editting, saving, and other purposes.
+
+gedit-notebook.c
+    this contains the operations to be performed on a notebook.
+        switch_to_last_focused_page (GeditNotebook *notebook, GeditTab *tab)
+        drag_data_received_cb (GtkWidget *widget,
+    		       GdkDragContext *context,
+        		       gint x,
+        		       gint y,
+                       GtkSelectionData *selection_data,
+        		       guint info,
+        		       guint timestamp)
+        gedit_notebook_page_added (GtkNotebook *notebook,
+                      GtkWidget *page,
+                      guint page_num)
+        gedit_notebook_class_init (GeditNotebookClass *klass)
+
+
+gedit-multi-notebook.c contains functions such as:
+    gedit_multi_notebook_class_init (GeditMultiNotebookClass *klass)
+    notebook_set_focus(GtkContainer *container, GtkWidget *widget, GeditMultiNotebook *mnb)
+
+    and so on that monitors the working of multiple "tabs" in a single notebook like :
+        opening a new tab
+        closing a tab
+        opening last closed
+        connecting a tab to the notebook
+
+        so the relation between a message and single tab is the same to the realtion between the tabs themselves and the notebook.
+
+
+gedit-window.c
+    here is contains the GUI data for the notebook and tabs.
+
++--------------------------------------------------------------------------------------------------------------------------------------+
+|--------------------------------------------------------------------------------------------------------------------------------------|
++--------------------------------------------------------------------------------------------------------------------------------------+
+notepad++
+
+autocomplete:
+    this uses vectors where is has two options for display:
+        api complete.
+        word only
+        and a combination of both.
+
+        there is two other vectors that carries data across tabs as it add the names of:
+            variable
+            functions
+
+        it uses chatAt(), sorting methods and most frequently used as parameters for suggestions.
+
+buffer:
+    it first receives the OS it is working with by the return value of
+        EolType::<OS_name>
+
+    Buffer(FileManager * pManager, BufferID id, Document doc, DocFileStatus type, const TCHAR *fileName)
+        is used to:
+            create the file
+            update timeStamp
+            check file state (if it is a dirty or un modifiable)
+
+    it also sets the language that the user is coding in (default : plain text)
+
+search:
+    convertExtendedToString(const TCHAR * query, TCHAR * result, int length)
+        the words are indexed and assigned a specific escape sequenct based on it's length in the gap buffer.
+            r,n,o,t,b,d,o,x,u
+        they correspond to length of word and the base-file sytem in which it's coded in(hexa or binary or octal)
+
+scintilla:
+    <it is another open source text editting and formatting library>
+
+    functions like:
+
+      Writing into disk:
+        Sending the "words" to the corresponding locations
+            getText(char *dest, size_t start, size_t end) const
+            getGenericText(TCHAR *dest, size_t destlen, int start, int end, int *mstart, int *mend) const
+
+            <note how they are declared constant so that there's no change in the data value as strings in C and C++ are permutable as a concept of string in just an array of characters
+            unlike strings in java or C#>
+
+       Reading from disk:
+        Retrive the words based on the buffer id values.
+            getWordFromRange(char * txt, int size, int pos1, int pos2)
+            getVisibleStartAndEndPosition(int * startPos, int * endPos)
+
+        Search for a particlar word in the given memory range
+            searchInTarget(const TCHAR * text2Find, size_t lenOfText2Find, size_t fromPos, size_t toPos) const
+
+        You can also drop functions my compressing them to increase readability:
+            expand(size_t& line, bool doExpand, bool force, int visLevels, int level)
+
+        Functions like <below> are used in converting memory location values
+            int2str(TCHAR *str, int strLen, int number, int base, int nbChiffre, bool isZeroLeading)
+
+
+
+Recently used:
+    initMenu(HMENU hMenu, int idBase, int posBase, Accelerator *pAccelerator, bool doSubMenu)
+    switchMode()
+    add(const TCHAR *fn)
+
+
+Process managing for the tabs:
+    process(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
+
+    file control:
+        const TCHAR *sessionFileName = reinterpret_cast<const TCHAR *>(lParam);
+        TCHAR **sessionFileArray = reinterpret_cast<TCHAR **>(wParam);
+
+            so we can see that the single pointer where the single one controls the main directory(notebook)
+            and the other one, the double pointer points to the respective private copies where it stores the data until saved.
+
+
+------------------------------------------------------------------------------------------------------------------------------------
